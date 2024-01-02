@@ -3,11 +3,16 @@
 #include <assert.h>
 #endif
 
+#ifndef MATH_H
+#define MATH_H
+#include <math.h>
+#endif
+
 #define UNIMPLEMENTED \
 do { \
 	fprintf(stderr, "%s:%d: UNIMPLEMENTED", __FILE__, __LINE__); \
 	exit(1); \
-} while(0)
+} while(0);
 
 typedef struct {
     unsigned int n;
@@ -127,6 +132,7 @@ int detMM(MM_i A) {
     } else {
         int res = 0;
         for (int i=0; i<A.n; i++) {
+            res += pow(-1, i)*A.MM[0][i]*detMM(minor(A, 0, i));
         }
     }
 
