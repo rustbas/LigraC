@@ -11,12 +11,13 @@
 #include "Ligra_int.h"
 
 int main(int argc, char** argv) {
-    MM_i test = zeroMM_i(5, 5);
+    MM_i test = randMM_i(5, 25, 0, 10);
 
     printMM_i(test);
 
     add_constMM_i(test, -3);
 
+    printf("\n");
     printMM_i(test);
 
     return 0;
