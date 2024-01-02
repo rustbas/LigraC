@@ -10,7 +10,7 @@
 
 #define UNIMPLEMENTED \
 do { \
-	fprintf(stderr, "%s:%d: UNIMPLEMENTED", __FILE__, __LINE__); \
+	fprintf(stderr, "%s:%d: UNIMPLEMENTED\n", __FILE__, __LINE__); \
 	exit(1); \
 } while(0);
 
@@ -106,7 +106,7 @@ MM_i mulMM_i(MM_i A, MM_i B) {
     return C;
 }
 
-static MM_i minor(MM_i A, unsigned int k, unsigned int l) {
+static MM_i minorMM_i(MM_i A, unsigned int k, unsigned int l) {
     MM_i temp = zeroMM_i(A.n-1, A.m-1);
 
     for (int i=0; i<A.n; ++i) {
@@ -120,7 +120,7 @@ static MM_i minor(MM_i A, unsigned int k, unsigned int l) {
     return temp;
 }
 
-int detMM(MM_i A) {
+int detMM_i(MM_i A) {
     if (A.m != A.n) {
         printf("Dimensions must be consistent!\n");
         printf("A = %dx%d\n", A.n, A.m);
@@ -132,7 +132,7 @@ int detMM(MM_i A) {
     } else {
         int res = 0;
         for (int i=0; i<A.n; i++) {
-            res += pow(-1, i)*A.MM[0][i]*detMM(minor(A, 0, i));
+            res += pow(-1, i)*A.MM[0][i]*detMM_i(minorMM_i(A, 0, i));
         }
     }
 
