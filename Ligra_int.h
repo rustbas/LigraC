@@ -109,7 +109,7 @@ static MM_i minor(MM_i A, unsigned int k, unsigned int l) {
     return temp;
 }
 
-int det(MM_i A) {
+int detMM(MM_i A) {
     if (A.m != A.n) {
         printf("Dimensions must be consistent!\n");
         printf("A = %dx%d\n", A.n, A.m);
