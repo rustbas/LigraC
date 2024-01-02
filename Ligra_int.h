@@ -35,27 +35,46 @@ MM_i randMM_i(unsigned int n, unsigned int m, int a, int b) {
     return MM;
 }
 
-MM_i addMM_i(MM_i a, MM_i b) {
-    for (int i=0; i<a.n; i++) {
-        for (int j=0; j<a.m; j++) {
-            a.MM[i][j] += b.MM[i][j];
+MM_i addMM_i(MM_i A, MM_i B) {
+
+    if ((A.n != B.n) || (A.m != B.m)) {
+        printf("Dimensions must be equal!\n");
+        printf("A = %dx%d, B = %dx%d\n", A.n, A.m, B.n, B.m);
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i=0; i<A.n; i++) {
+        for (int j=0; j<A.m; j++) {
+            A.MM[i][j] += B.MM[i][j];
         }
     }
 
-    return a;
+    return A;
 }
 
-MM_i subMM_i(MM_i a, MM_i b) {
-    for (int i=0; i<a.n; i++) {
-        for (int j=0; j<a.m; j++) {
-            a.MM[i][j] -= b.MM[i][j];
+MM_i subMM_i(MM_i A, MM_i B) {
+    if ((A.n != B.n) || (A.m != B.m)) {
+        printf("Dimensions must be equal!\n");
+        printf("A = %dx%d, B = %dx%d\n", A.n, A.m, B.n, B.m);
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i=0; i<A.n; i++) {
+        for (int j=0; j<A.m; j++) {
+            A.MM[i][j] -= A.MM[i][j];
         }
     }
 
-    return a;
+    return A;
 }
 
 MM_i mulMM_i(MM_i A, MM_i B) {
+    if (A.m != B.n) {
+        printf("Dimensions must be consistent!\n");
+        printf("A = %dx%d, B = %dx%d\n", A.n, A.m, B.n, B.m);
+        exit(EXIT_FAILURE);
+    }
+
     MM_i C = zeroMM_i(A.n, B.m);
 
     for (int i=0; i<A.n; ++i) {
