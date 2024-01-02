@@ -1,3 +1,8 @@
+#ifndef ASSERT_H
+#define ASSERT_H
+#include <assert.h>
+#endif
+
 typedef struct {
     unsigned int n;
     unsigned int m;
@@ -28,6 +33,26 @@ MM_i randMM_i(unsigned int n, unsigned int m, int a, int b) {
     }
 
     return MM;
+}
+
+MM_i addMM_i(MM_i a, MM_i b) {
+    for (int i=0; i<a.n; i++) {
+        for (int j=0; j<a.m; j++) {
+            a.MM[i][j] += b.MM[i][j];
+        }
+    }
+
+    return a;
+}
+
+MM_i subMM_i(MM_i a, MM_i b) {
+    for (int i=0; i<a.n; i++) {
+        for (int j=0; j<a.m; j++) {
+            a.MM[i][j] -= b.MM[i][j];
+        }
+    }
+
+    return a;
 }
 
 MM_i add_constMM_i(MM_i MM, int C) {
