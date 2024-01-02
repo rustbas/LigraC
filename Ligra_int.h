@@ -3,6 +3,12 @@
 #include <assert.h>
 #endif
 
+#define UNIMPLEMENTED \
+do { \
+	fprintf(stderr, "%s:%d: UNIMPLEMENTED", __FILE__, __LINE__); \
+	exit(1); \
+} while(0)
+
 typedef struct {
     unsigned int n;
     unsigned int m;
@@ -101,7 +107,7 @@ static MM_i minor(MM_i A, unsigned int k, unsigned int l) {
     for (int i=0; i<A.n; ++i) {
         for (int j=0; j<A.n; ++j) {
             if (i != k || j != l) {
-                
+                UNIMPLEMENTED
             }
         }
     }
