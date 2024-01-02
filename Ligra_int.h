@@ -10,7 +10,6 @@ typedef struct {
 } MM_i;
 
 MM_i zeroMM_i(unsigned int n, unsigned int m) {
-
     MM_i res;
     res.n = n;
     res.m = m;
@@ -45,7 +44,6 @@ MM_i randMM_i(unsigned int n, unsigned int m, int a, int b) {
 }
 
 MM_i addMM_i(MM_i A, MM_i B) {
-
     if ((A.n != B.n) || (A.m != B.m)) {
         printf("Dimensions must be equal!\n");
         printf("A = %dx%d, B = %dx%d\n", A.n, A.m, B.n, B.m);
@@ -97,6 +95,38 @@ MM_i mulMM_i(MM_i A, MM_i B) {
     return C;
 }
 
+static MM_i minor(MM_i A, unsigned int k, unsigned int l) {
+    MM_i temp = zeroMM_i(A.n-1, A.m-1);
+
+    for (int i=0; i<A.n; ++i) {
+        for (int j=0; j<A.n; ++j) {
+            if (i != k || j != l) {
+                
+            }
+        }
+    }
+
+    return temp;
+}
+
+int det(MM_i A) {
+    if (A.m != A.n) {
+        printf("Dimensions must be consistent!\n");
+        printf("A = %dx%d\n", A.n, A.m);
+        exit(EXIT_FAILURE);
+    }
+
+    if (A.n == 2) {
+        return A.MM[0][0]*A.MM[1][1] - A.MM[0][1]*A.MM[1][0];
+    } else {
+        int res = 0;
+        for (int i=0; i<A.n; i++) {
+        }
+    }
+
+    return 0;
+}
+
 MM_i add_constMM_i(MM_i MM, int C) {
     for (int i=0; i<MM.n; i++) {
         for (int j=0; j<MM.m; j++) {
@@ -117,4 +147,11 @@ void printMM_i(MM_i MM) {
         }
         printf("\n");
     }
+}
+
+void freeMM_i(MM_i A) {
+    for (int i=0; i<A.n; ++i) {
+        free(A.MM[i]);
+    }
+    free(A.MM);
 }
