@@ -55,6 +55,20 @@ MM_i subMM_i(MM_i a, MM_i b) {
     return a;
 }
 
+MM_i mulMM_i(MM_i A, MM_i B) {
+    MM_i C = zeroMM_i(A.n, B.m);
+
+    for (int i=0; i<A.n; ++i) {
+        for (int j=0; j<B.m; ++j) {
+            for (int k=0; k<A.m; ++k) {
+                C.MM[i][j] += A.MM[i][k] * B.MM[k][j];
+            }
+        }
+    }
+
+    return C;
+}
+
 MM_i add_constMM_i(MM_i MM, int C) {
     for (int i=0; i<MM.n; i++) {
         for (int j=0; j<MM.m; j++) {
