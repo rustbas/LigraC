@@ -5,4 +5,6 @@ Little C library for linear algebra.
 
 1. [x] Create matrix-structs;
 2. [ ] Add basic operations;
-3. [ ] Float version must be created by `sed` or something;
+3. [x] Add some dimension checks;
+4. [ ] Float version must be created by `sed` or something;
+5. [ ] Add openmp
