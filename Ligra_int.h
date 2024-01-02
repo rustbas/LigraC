@@ -23,6 +23,15 @@ MM_i zeroMM_i(unsigned int n, unsigned int m) {
     return res;
 }
 
+MM_i eyeMM_i(unsigned int n) {
+    MM_i res = zeroMM_i(n, n);
+    for (int i=0; i<n; i++) {
+        res.MM[i][i] = 1;
+    }
+
+    return res;
+}
+
 MM_i randMM_i(unsigned int n, unsigned int m, int a, int b) {
     MM_i MM = zeroMM_i(n, m);
 
