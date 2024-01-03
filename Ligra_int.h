@@ -111,7 +111,18 @@ static MM_i minorMM_i(MM_i A, unsigned int k, unsigned int l) {
 
     for (int i=0; i<A.n; ++i) {
         for (int j=0; j<A.n; ++j) {
-                UNIMPLEMENTED
+            if ((i<k)&&(j<l)) {
+                temp.MM[i][j] = A.MM[i][j];
+            } else if ((i<k)&&(j>l)) {
+                temp.MM[i][j-1] = A.MM[i][j];
+            } else if ((i>k)&&(j<l)) {
+                temp.MM[i-1][j] = A.MM[i][j];
+            } else if ((i>k)&&(j>l)) {
+                temp.MM[i-1][j-1] = A.MM[i][j];
+            } else {
+                continue;
+            }
+
         }
     }
 
@@ -132,9 +143,9 @@ int detMM_i(MM_i A) {
         for (int i=0; i<A.n; i++) {
             res += pow(-1, i)*A.MM[0][i]*detMM_i(minorMM_i(A, 0, i));
         }
+        return res;
     }
 
-    return 0;
 }
 
 MM_i add_constMM_i(MM_i MM, int C) {
