@@ -1,7 +1,8 @@
 all: ctags
-	clang -o result.out main.c -g3 -lm
+	gcc -o result.out main.c -O3 -lm -fopenmp
+test: ctags
+	gcc -o result.out main.c -g3 -lm -fopenmp
 clean:
 	rm *.out
-	rm *.so
 ctags:
 	ctags --recurse
