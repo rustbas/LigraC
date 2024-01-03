@@ -13,11 +13,13 @@
 #include <omp.h>
 #endif
 
+#ifndef UNIMPLEMENTED
 #define UNIMPLEMENTED \
 do { \
 	fprintf(stderr, "%s:%d: UNIMPLEMENTED\n", __FILE__, __LINE__); \
 	exit(1); \
 } while(0);
+#endif
 
 typedef struct {
     unsigned int n;
