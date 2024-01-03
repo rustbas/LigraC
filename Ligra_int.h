@@ -8,6 +8,11 @@
 #include <math.h>
 #endif
 
+#ifndef OMP_H
+#define OMP_H
+#include <omp.h>
+#endif
+
 #define UNIMPLEMENTED \
 do { \
 	fprintf(stderr, "%s:%d: UNIMPLEMENTED\n", __FILE__, __LINE__); \
@@ -140,12 +145,12 @@ int detMM_i(MM_i A) {
         return A.MM[0][0]*A.MM[1][1] - A.MM[0][1]*A.MM[1][0];
     } else {
         int res = 0;
+//#pragma omp parallel for reduction(+:res)
         for (int i=0; i<A.n; i++) {
             res += pow(-1, i)*A.MM[0][i]*detMM_i(minorMM_i(A, 0, i));
         }
         return res;
     }
-
 }
 
 MM_i add_constMM_i(MM_i MM, int C) {
