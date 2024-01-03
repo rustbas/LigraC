@@ -153,6 +153,17 @@ int detMM_i(MM_i A) {
     }
 }
 
+MM_i mulConstMM_i(MM_i A, int C) {
+    for (int i=0; i<A.n; i++) {
+        for (int j=0; j<A.m; j++) {
+            A.MM[i][j] *= C;
+        }
+    }
+
+    return A;
+
+}
+
 MM_i add_constMM_i(MM_i MM, int C) {
     for (int i=0; i<MM.n; i++) {
         for (int j=0; j<MM.m; j++) {
