@@ -111,9 +111,7 @@ static MM_i minorMM_i(MM_i A, unsigned int k, unsigned int l) {
 
     for (int i=0; i<A.n; ++i) {
         for (int j=0; j<A.n; ++j) {
-            if (i != k || j != l) {
                 UNIMPLEMENTED
-            }
         }
     }
 
