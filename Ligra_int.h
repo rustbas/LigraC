@@ -25,10 +25,10 @@ typedef struct {
     unsigned int n;
     unsigned int m;
     int** MM;
-} MM_i;
+} M_i;
 
-MM_i zeroMM_i(unsigned int n, unsigned int m) {
-    MM_i res;
+M_i zeroM_i(unsigned int n, unsigned int m) {
+    M_i res;
     res.n = n;
     res.m = m;
 
@@ -40,8 +40,8 @@ MM_i zeroMM_i(unsigned int n, unsigned int m) {
     return res;
 }
 
-MM_i eyeMM_i(unsigned int n) {
-    MM_i res = zeroMM_i(n, n);
+M_i eyeM_i(unsigned int n) {
+    M_i res = zeroM_i(n, n);
     for (int i=0; i<n; i++) {
         res.MM[i][i] = 1;
     }
@@ -49,8 +49,8 @@ MM_i eyeMM_i(unsigned int n) {
     return res;
 }
 
-MM_i randMM_i(unsigned int n, unsigned int m, int a, int b) {
-    MM_i MM = zeroMM_i(n, m);
+M_i randM_i(unsigned int n, unsigned int m, int a, int b) {
+    M_i MM = zeroM_i(n, m);
 
     for (int i=0; i<n; i++) {
         for (int j=0; j<m; j++) {
@@ -61,7 +61,7 @@ MM_i randMM_i(unsigned int n, unsigned int m, int a, int b) {
     return MM;
 }
 
-MM_i addMM_i(MM_i A, MM_i B) {
+M_i addM_i(M_i A, M_i B) {
     if ((A.n != B.n) || (A.m != B.m)) {
         printf("Dimensions must be equal!\n");
         printf("A = %dx%d, B = %dx%d\n", A.n, A.m, B.n, B.m);
@@ -77,7 +77,7 @@ MM_i addMM_i(MM_i A, MM_i B) {
     return A;
 }
 
-MM_i subMM_i(MM_i A, MM_i B) {
+M_i subM_i(M_i A, M_i B) {
     if ((A.n != B.n) || (A.m != B.m)) {
         printf("Dimensions must be equal!\n");
         printf("A = %dx%d, B = %dx%d\n", A.n, A.m, B.n, B.m);
@@ -93,14 +93,14 @@ MM_i subMM_i(MM_i A, MM_i B) {
     return A;
 }
 
-MM_i mulMM_i(MM_i A, MM_i B) {
+M_i mulM_i(M_i A, M_i B) {
     if (A.m != B.n) {
         printf("Dimensions must be consistent!\n");
         printf("A = %dx%d, B = %dx%d\n", A.n, A.m, B.n, B.m);
         exit(EXIT_FAILURE);
     }
 
-    MM_i C = zeroMM_i(A.n, B.m);
+    M_i C = zeroM_i(A.n, B.m);
 
     for (int i=0; i<A.n; ++i) {
         for (int j=0; j<B.m; ++j) {
@@ -113,8 +113,8 @@ MM_i mulMM_i(MM_i A, MM_i B) {
     return C;
 }
 
-static MM_i minorMM_i(MM_i A, unsigned int k, unsigned int l) {
-    MM_i temp = zeroMM_i(A.n-1, A.m-1);
+static M_i minorM_i(M_i A, unsigned int k, unsigned int l) {
+    M_i temp = zeroM_i(A.n-1, A.m-1);
 
     for (int i=0; i<A.n; ++i) {
         for (int j=0; j<A.n; ++j) {
@@ -136,7 +136,7 @@ static MM_i minorMM_i(MM_i A, unsigned int k, unsigned int l) {
     return temp;
 }
 
-int detMM_i(MM_i A) {
+int detM_i(M_i A) {
     if (A.m != A.n) {
         printf("Dimensions must be consistent!\n");
         printf("A = %dx%d\n", A.n, A.m);
@@ -148,13 +148,13 @@ int detMM_i(MM_i A) {
     } else {
         int res = 0;
         for (int i=0; i<A.n; i++) {
-            res += pow(-1, i)*A.MM[0][i]*detMM_i(minorMM_i(A, 0, i));
+            res += pow(-1, i)*A.MM[0][i]*detM_i(minorM_i(A, 0, i));
         }
         return res;
     }
 }
 
-MM_i mulConstMM_i(MM_i A, int C) {
+M_i mulConstM_i(M_i A, int C) {
     for (int i=0; i<A.n; i++) {
         for (int j=0; j<A.m; j++) {
             A.MM[i][j] *= C;
@@ -164,7 +164,7 @@ MM_i mulConstMM_i(MM_i A, int C) {
     return A;
 }
 
-MM_i add_constMM_i(MM_i MM, int C) {
+M_i add_constM_i(M_i MM, int C) {
     for (int i=0; i<MM.n; i++) {
         for (int j=0; j<MM.m; j++) {
             MM.MM[i][j] += C;
@@ -174,7 +174,7 @@ MM_i add_constMM_i(MM_i MM, int C) {
     return MM;
 }
 
-void printMM_i(MM_i MM) {
+void printM_i(M_i MM) {
     unsigned int n = MM.n;
     unsigned int m = MM.m;
 
@@ -186,7 +186,7 @@ void printMM_i(MM_i MM) {
     }
 }
 
-void freeMM_i(MM_i A) {
+void freeM_i(M_i A) {
     for (int i=0; i<A.n; ++i) {
         free(A.MM[i]);
     }
