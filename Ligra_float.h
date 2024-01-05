@@ -143,7 +143,9 @@ float detM_f(M_f A) {
         exit(EXIT_FAILURE);
     }
 
-    if (A.n == 2) {
+    if (A.n == 1) {
+        return A.MM[0][0];
+    } else if (A.n == 2) {
         return A.MM[0][0]*A.MM[1][1] - A.MM[0][1]*A.MM[1][0];
     } else {
         float res = 0;
@@ -152,6 +154,41 @@ float detM_f(M_f A) {
         }
         return res;
     }
+}
+
+M_f transposeM_f(M_f A) {
+    M_f res = zeroM_f(A.m, A.n);
+
+
+    for (int i=0; i<A.n; i++) {
+        for (int j=0; j<A.m; j++) {
+            res.MM[j][i] = A.MM[i][j];
+        }
+    }
+
+    return res;
+}
+
+M_f invM_f(M_f A) {
+    if (A.m != A.n) {
+        printf("Dimensions must be consistent!\n");
+        printf("A = %dx%d\n", A.n, A.m);
+        exit(EXIT_FAILURE);
+    }
+
+    float det = detM_f(A);
+    float temp;
+
+    M_f result = zeroM_f(A.n, A.m);
+
+    for (int i=0; i<A.n; i++) {
+        for (int j=0; j<A.m; j++) {
+            temp = detM_f(minorM_f(transposeM_f(A), i, j));
+            result.MM[i][j] = powf(-1.0f, i+j) * temp / det;
+        }
+    }
+
+    return result;
 }
 
 M_f mulConstM_f(M_f A, float C) {
