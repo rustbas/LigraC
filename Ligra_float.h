@@ -156,6 +156,35 @@ float detM_f(M_f A) {
     }
 }
 
+float traceM_f(M_f A) {
+    if (A.m != A.n) {
+        printf("Dimensions must be consistent!\n");
+        printf("A = %dx%d\n", A.n, A.m);
+        exit(EXIT_FAILURE);
+    }
+
+    float res = 1.0;
+    for (int i=0; i<A.n; i++) {
+        res *= A.MM[i][i];
+    }
+
+    return res;
+}
+
+float det_fastM_f(M_f A) {
+    if (A.m != A.n) {
+        printf("Dimensions must be consistent!\n");
+        printf("A = %dx%d\n", A.n, A.m);
+        exit(EXIT_FAILURE);
+    }
+
+    int i, j, k;
+
+    UNIMPLEMENTED
+
+    return traceM_f(A);
+}
+
 M_f transposeM_f(M_f A) {
     M_f res = zeroM_f(A.m, A.n);
 
