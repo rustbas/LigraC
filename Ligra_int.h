@@ -154,6 +154,19 @@ int detM_i(M_i A) {
     }
 }
 
+M_i transposeM_i(M_i A) {
+    M_i res = zeroM_i(A.m, A.n);
+
+
+    for (int i=0; i<A.n; i++) {
+        for (int j=0; j<A.m; j++) {
+            res.MM[j][i] = A.MM[i][j];
+        }
+    }
+
+    return res;
+}
+
 M_i mulConstM_i(M_i A, int C) {
     for (int i=0; i<A.n; i++) {
         for (int j=0; j<A.m; j++) {
