@@ -10,3 +10,4 @@ Little C library for linear algebra.
 5. [ ] Add `invM_f` func;
 6. [x] Float version must be created by `sed` or something;
 7. [ ] Add `openmp`;
+8. [ ] Add `free` everywhere;
