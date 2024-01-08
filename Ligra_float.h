@@ -27,6 +27,18 @@ typedef struct {
     float** MM;
 } M_f;
 
+void printM_f(M_f MM) {
+    unsigned int n = MM.n;
+    unsigned int m = MM.m;
+
+    for (int i=0; i<n; i++) {
+        for (int j=0; j<m; j++) {
+            printf("%f ", MM.MM[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 M_f zeroM_f(unsigned int n, unsigned int m) {
     M_f res;
     res.n = n;
@@ -179,8 +191,18 @@ float det_fastM_f(M_f A) {
     }
 
     int i, j, k;
+    float tmp;
 
-    UNIMPLEMENTED
+    for (i=1; i<A.n; i++) {
+        for (j=0; j<i; j++) {
+            tmp = A.MM[i][i-1];
+            for (k=0; k<A.m; k++) {
+                A.MM[i][k] -= A.MM[j][k] / A.MM[j][j] * A.MM[i][i-1];
+            }
+        }
+    }
+
+    printM_f(A);
 
     return traceM_f(A);
 }
@@ -238,18 +260,6 @@ M_f add_constM_f(M_f MM, float C) {
     }
 
     return MM;
-}
-
-void printM_f(M_f MM) {
-    unsigned int n = MM.n;
-    unsigned int m = MM.m;
-
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<m; j++) {
-            printf("%f ", MM.MM[i][j]);
-        }
-        printf("\n");
-    }
 }
 
 void freeM_f(M_f A) {
